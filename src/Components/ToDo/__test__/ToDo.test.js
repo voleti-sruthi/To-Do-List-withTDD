@@ -1,6 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ToDo from '../ToDo';
-import AddTask from '../../AddTask/AddTask';
+import { BrowserRouter } from 'react-router-dom';
+const MockTodo = ()=>{
+    return <BrowserRouter><ToDo/></BrowserRouter>
+}
+
 const toAddTask= (task)=>{
     const inputField = screen.getByPlaceholderText("Add New Task");
     const buttonElement = screen.getByRole("button",{name:"ADD"});
@@ -13,7 +17,7 @@ const toAddTask= (task)=>{
 
 describe("To check the functionality of the taskList",()=>{
     it("to display the task on adding to task list",()=>{
-        render(<ToDo/>)
+        render(<MockTodo/>)
         toAddTask(["Task 1"])
         const taskData = screen.getAllByTestId("ToDoTask");
         taskData.forEach((item)=>{
@@ -22,7 +26,7 @@ describe("To check the functionality of the taskList",()=>{
     })
     
     it("to display the task on adding to task list",()=>{
-        render(<ToDo/>)
+        render(<MockTodo/>)
         toAddTask(["Task 1","Task 2"])
         const taskData = screen.getAllByTestId("ToDoTask");
         taskData.forEach((item)=>{
